@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Multicons
-Plugin URI: http://www.doc4design.com/plugins/frapple
+Plugin URI: http://www.doc4design.com/plugins/multicons
 Description: Auto generates code for both a favicon and an apple favicon into the header of your website
 Version: 1.0
 Author: Doc4
