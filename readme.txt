@@ -17,24 +17,24 @@ Favicons have a subtle, if small, role in building the branding of a website. Wh
 
 The meta data output by Multicons:
 
-Site-wide Favicon:
-* Location: Website [and Admin if no Admin Favicon specified]
+Site-wide Favicon:<br>
+* Location: Website [and Admin if no Admin Favicon specified]<br>
 * Meta Tags generated:
 
 <code><link rel="shortcut icon" href="http://www.yoursite.com/favicon.ico" />
-<link rel="icon" type="image/png" href="http://www.yoursite.com/favicon.ico" /></code>
+<link rel="icon" type="image/png" href="http://www.yoursite.com/favicon.ico" /></code><br><br>
 
-Admin Favicon:
-* Location: Admin Only
+Admin Favicon:<br>
+* Location: Admin Only<br>
 * Meta Tag generated:
 
-<code><link rel="shortcut icon" href="http://www.yoursite.com/wp-content/favicon.ico" /></code>
+<code><link rel="shortcut icon" href="http://www.yoursite.com/wp-content/favicon.ico" /></code><br><br>
 
-Apple Touch Icon
-* Location: Website Only
+Apple Touch Icon<br>
+* Location: Website Only<br>
 * Meta Tag generated:
 
-<code><link rel="apple-touch-icon" href="http://www.yoursite.com/apple-touch-icon.png"></code>
+<code><link rel="apple-touch-icon" href="http://www.yoursite.com/apple-touch-icon.png"></code><br><br>
 
 If no image links are provided then no code is output thus, leaving a settings field blank will not bloat the site down with empty meta tags. If an is Admin image is not provided this option will default to the Site-Wide Favicon.
 
