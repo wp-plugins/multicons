@@ -18,21 +18,21 @@ Favicons have a subtle, if small, role in building the branding of a website. Wh
 The meta data output by Multicons:
 
 Site-wide Favicon:
-¥ Location: Website [and Admin if no Admin Favicon specified]
-¥ Meta Tags generated:
+* Location: Website [and Admin if no Admin Favicon specified]
+* Meta Tags generated:
 
 <code><link rel="shortcut icon" href="http://www.yoursite.com/favicon.ico" />
 <link rel="icon" type="image/png" href="http://www.yoursite.com/favicon.ico" /></code>
 
 Admin Favicon:
-¥ Location: Admin Only
-¥ Meta Tag generated:
+* Location: Admin Only
+* Meta Tag generated:
 
 <code><link rel="shortcut icon" href="http://www.yoursite.com/wp-content/favicon.ico" /></code>
 
 Apple Touch Icon
-¥ Location: Website Only
-¥ Meta Tag generated:
+* Location: Website Only
+* Meta Tag generated:
 
 <code><link rel="apple-touch-icon" href="http://www.yoursite.com/apple-touch-icon.png"></code>
 
