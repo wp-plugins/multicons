@@ -16,13 +16,12 @@ Not sure what a favicon is? "A favicon (short for favorites icon), also known as
 Favicons have a subtle, if small, role in building the branding of a website. When a user takes notice of a favicon it can often be a good indication they have come to the right place serving as visual representation of a website not only in the browser address bar but also when sifting through bookmarks. It is no secret that our eyes gravitate towards images before text and not just on the web but iPhones and iPads as well.
 
 = The meta data output by Multicons: =
-<br>
 
 = Site-wide Favicon: =
 * Location: Website [and Admin if no Admin Favicon specified]
 * Meta Tags generated:
 
-link rel="shortcut icon" href="http://www.yoursite.com/favicon.ico"
+link rel="shortcut icon" href="http://www.yoursite.com/favicon.ico"<br>
 link rel="icon" type="image/png" href="http://www.yoursite.com/favicon.ico" /
 
 = Admin Favicon: =
