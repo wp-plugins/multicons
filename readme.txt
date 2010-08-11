@@ -60,5 +60,8 @@ To install the plugin just follow these simple steps:
 
 == Changelog ==
 
+= 1.1 =
+* Removed unlink function - causing problems
+
 = 1.0 =
 * Release candidate 1: code name 'Fapple'
