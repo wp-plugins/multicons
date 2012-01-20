@@ -20,22 +20,22 @@ Favicons have a subtle, if small, role in building the branding of a website. Wh
 
 = The meta data output by Multicons: =
 
-= Site-wide Favicon: =
-* Location: Website [and Admin if no Admin Favicon specified]
-* Meta Tags generated:
+= Website Favicon: =
+* Location: Website [and Dashboard if no Dashboard Favicon is specified]
+* Meta tags generated:
 
 link rel="shortcut icon" href="http://www.yoursite.com/favicon.ico"<br>
 link rel="icon" type="image/png" href="http://www.yoursite.com/favicon.ico" /
 
-= Admin Favicon: =
-* Location: Admin Only
-* Meta Tag generated:
+= Dashboard Favicon: =
+* Location: Dashboard Only
+* Meta tag generated:
 
 link rel="shortcut icon" href="http://www.yoursite.com/wp-content/favicon.ico"
 
 = Apple Touch Icon =
 * Location: Website Only
-* Meta Tag generated:
+* Meta tag generated:
 
 link rel="apple-touch-icon" href="http://www.yoursite.com/apple-touch-icon.png"
 
@@ -62,6 +62,10 @@ To install the plugin just follow these simple steps:
 
 
 == Changelog ==
+
+= 1.2 =
+* Updated instructions for clarity
+* Fixed file naming error. [favicon.icon] is incorrect
 
 = 1.1 =
 * Removed unlink function - causing problems
