@@ -87,6 +87,11 @@ function personal_setup_page(){
 					   Example: <em>http://www.yoursite.com/favicon.ico</em>')); ?>
 	 </td></tr>
      
+     <tr><th scope="row"><?php _e('Instructions') ?></th>
+	 <td>
+	 <?php printf(__('1. Name your Favicon [favicon.ico]<br />
+	                   2. Place the Favicon image file in the root dirctory of your website. [same location as wp-content]')); ?>
+     
      </tbody>
      </table>
      
@@ -103,10 +108,9 @@ function personal_setup_page(){
      
      <tr><th scope="row"><?php _e('Instructions') ?></th>
 	 <td>
-	 <?php printf(__('1. Name your Favicon [favicon.ico]<br />
-	                   2. Place the Favicon image file in the root dirctory of your website. [same location as wp-content]<br />
-	                   3. Name your Admin Favicon [favicon.icon] Defaults to Favicon image if not specified.<br />
-					   4. Place the Admin Favicon image file in the wp-content folder of your website.')); ?>
+	 <?php printf(__('1. Leave field blank to use the Website Favicon from above.<br/>
+	 				   2. Name your Dashboard Favicon [favicon.ico]<br />
+					   3. Place the Dashboard Favicon image file in the wp-content folder of your website. [same location as themes]')); ?>
      
      </tbody>
      </table>
