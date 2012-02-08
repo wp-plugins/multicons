@@ -12,7 +12,7 @@ Stable tag: 1.2
 = Plugin URL =
 http://www.doc4design.com/plugins/multicons/
 
-Multicons is a multi-favicon code generator which automatically inserts the necessary meta tags for both favicons (site-wide and/or admin) and Apple Touch icons.
+Multicons is a multi-favicon code generator which automatically inserts the necessary meta tags for both favicons (site-wide and/or admin) and Apple Touch / iPhone icons.
 
 Not sure what a favicon is? "A favicon (short for favorites icon), also known as a shortcut icon, website icon, URL icon, or bookmark icon is a 16×16 or 32×32 pixel square icon associated with a particular website or webpage. A web designer can create such an icon and install it into a website (or webpage) by several means, and most graphical web browsers will then make use of it. Browsers that provide favicon support typically display a page's favicon in the browser's address bar and next to the page's name in a list of bookmarks. Browsers that support a tabbed document interface  typically show a page's favicon next to the page's title on the tab. Some programs allow the user to select an icon of their own from the hard drive and associate it with a website." - Wikipedia
 
@@ -33,7 +33,7 @@ link rel="icon" type="image/png" href="http://www.yoursite.com/favicon.ico" /
 
 link rel="shortcut icon" href="http://www.yoursite.com/wp-content/favicon.ico"
 
-= Apple Touch Icon =
+= Apple Touch / iPhone Icon =
 * Location: Website Only
 * Meta tag generated:
 
