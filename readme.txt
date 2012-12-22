@@ -3,7 +3,7 @@ Contributors: Doc4
 Donate link: http://www.doc4design.com/donate
 Tags: favicon, icon, apple favicon, apple icon, apple touch icon
 Requires at least: 2.7
-Tested up to: 3.3.1
+Tested up to: 3.5
 Stable tag: 1.2
 
 
