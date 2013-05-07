@@ -3,8 +3,8 @@ Contributors: Doc4
 Donate link: http://www.doc4design.com/donate
 Tags: favicon, icon, apple favicon, apple icon, apple touch icon
 Requires at least: 2.7
-Tested up to: 3.5
-Stable tag: 1.2
+Tested up to: 3.5.1
+Stable tag: 2.0
 
 
 == Description ==
@@ -33,8 +33,16 @@ link rel="icon" type="image/png" href="http://www.yoursite.com/favicon.ico" /
 
 link rel="shortcut icon" href="http://www.yoursite.com/wp-content/favicon.ico"
 
-= Apple Touch / iPhone Icon =
+= Apple Touch Original / iPhone Icon =
 * Location: Website Only
+* iDevice Effects Added such as Gloss and Rounded Corners
+* Meta tag generated:
+
+link rel="apple-touch-icon" href="http://www.yoursite.com/apple-touch-icon.png"
+
+= Apple Touch Precomposed / iPhone Icon =
+* Location: Website Only
+* No iDevice Effects Added
 * Meta tag generated:
 
 link rel="apple-touch-icon" href="http://www.yoursite.com/apple-touch-icon.png"
@@ -62,6 +70,10 @@ To install the plugin just follow these simple steps:
 
 
 == Changelog ==
+
+= 2.0 =
+* Added Apple Precomposed Icons
+* Make a distinction between Original and Precomposed Apple Icons
 
 = 1.2 =
 * Updated instructions for clarity
