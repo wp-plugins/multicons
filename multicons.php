@@ -3,7 +3,7 @@
 Plugin Name: Multicons
 Plugin URI: http://www.doc4design.com/plugins/multicons
 Description: Auto generates code for both a favicon and an apple favicon into the header of your website
-Version: 1.2
+Version: 2.0
 Author: Doc4
 Author URI: http://www.doc4design.com
 */
@@ -30,7 +30,7 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 *********************************************************************************/
 
 
-$ver= '1.2';
+$ver= '2.0';
 
 $gfile = dirname(__FILE__) . '/multicons.php';
 /* Causing problems with some users
@@ -59,7 +59,8 @@ function personal_setup_page(){
 	if (isset($_POST['update'])) {
 	    $options['global_url'] = trim($_POST['global_url'],'{}');
 		$options['admin_url'] = trim($_POST['admin_url'],'{}');
-	    $options['iphone_url'] = trim($_POST['iphone_url'],'{}');
+	    $options['iphone_original_url'] = trim($_POST['iphone_original_url'],'{}');
+	    $options['iphone_precomposed_url'] = trim($_POST['iphone_precomposed_url'],'{}');
 		
 		update_option('fav_url_option', $options);
 		// Show a message to indicate something has happened
@@ -116,21 +117,44 @@ function personal_setup_page(){
      </table>
      
      
-     <h3><?php echo __('Apple Touch Icon'); ?></h3>
+     <h3><?php echo __('Apple Touch Original Icon'); ?></h3>
      
      <table class="form-table"><tbody>
      
-     <tr><th scope="row"><?php _e('Apple Touch Icon URL') ?></th>
-	 <td><label><input name="iphone_url" type="text" id="iphone_url" value="<?php echo $options['iphone_url']; ?>" size="60" /></label><br/>
-	 <?php printf(__('Indicate the absolute path to the Apple Touch Icon image.<br />
+     <tr><th scope="row"><?php _e('Apple Touch Original Icon URL') ?></th>
+	 <td><label><input name="iphone_original_url" type="text" id="iphone_original_url" value="<?php echo $options['iphone_original_url']; ?>" size="60" /></label><br/>
+	 <?php printf(__('Indicate the absolute path to the Apple Touch Original Icon image.<br />
 	                   Example: <em>http://www.yoursite.com/apple-touch-icon.png</em>')); ?>
 	 </td></tr>
      
      <tr><th scope="row"><?php _e('Instructions') ?></th>
 	 <td>
-	 <?php printf(__('1. Name your Apple Touch Icon [apple-touch-icon.png]<br />
-	                   2. Place the Apple Touch Icon image file in the root dirctory of your website. [same location as wp-content]<br />
-					   3. Rounded corners are automatically applied by Apple devices searching for this icon.')); ?>
+	 <?php printf(__('1. Only use one Apple Touch Icon link (Do not add a url to both Original and Precomposed)<br />
+	  				   2. Name your Apple Touch Original Icon [apple-touch-icon.png]<br />
+	                   3. Place the Apple Touch Original Icon image file in the root dirctory of your website. [same location as wp-content]<br />
+					   4. Rounded corners and Gloss effects are automatically applied by Apple devices searching for this icon.')); ?>
+	 </td></tr>
+     
+     </tbody>
+     </table>
+     
+     
+     <h3><?php echo __('Apple Touch Precomposed Icon'); ?></h3>
+     
+     <table class="form-table"><tbody>
+     
+     <tr><th scope="row"><?php _e('Apple Touch Precomposed Icon URL') ?></th>
+	 <td><label><input name="iphone_precomposed_url" type="text" id="iphone_precomposed_url" value="<?php echo $options['iphone_precomposed_url']; ?>" size="60" /></label><br/>
+	 <?php printf(__('Indicate the absolute path to the Apple Touch Precomposed Icon image.<br />
+	                   Example: <em>http://www.yoursite.com/apple-touch-icon-precomposed.png</em>')); ?>
+	 </td></tr>
+     
+     <tr><th scope="row"><?php _e('Instructions') ?></th>
+	 <td>
+	 <?php printf(__('1. Only use one Apple Touch Icon link (Do not add a url to both Original and Precomposed)<br />
+	 				   2. Name your Apple Touch Precomposed Icon [apple-touch-icon-precomposed.png]<br />
+	                   3. Place the Apple Touch Precomposed Icon image file in the root dirctory of your website. [same location as wp-content]<br />
+					   4. No effects are applied by Apple devices searching for this icon.')); ?>
 	 </td></tr>
      
      </tbody>
@@ -153,8 +177,7 @@ function personal_setup_page(){
 			 if(empty($options['global_url'])){
 			 echo "";
 			 } else {
-			 echo"<link rel=\"shortcut icon\" href=\"$options[global_url]\" />
-			      <link rel=\"icon\" type=\"image/png\" href=\"$options[global_url]\" />";
+			 echo"<link rel=\"shortcut icon\" href=\"$options[global_url]\" />\n<link rel=\"icon\" type=\"image/png\" href=\"$options[global_url]\" />\n";
 			 }
             } 
 			add_action('wp_head', 'GlobalFavicon');
@@ -173,16 +196,30 @@ function personal_setup_page(){
             add_action('admin_head', 'Dashboardfavicon');
 			
 			
-			function iPhonefavicon() {
+			function iPhone_originalfavicon() {
             $options = get_option('fav_url_option');
 			
-			 if(empty($options['iphone_url'])){
+			 if(empty($options['iphone_original_url'])){
 			 echo "";
 			 } else {
-			 echo"<link rel=\"apple-touch-icon\" href=\"$options[iphone_url]\" />";
+			 echo"<link rel=\"apple-touch-icon\" href=\"$options[iphone_original_url]\" />\n";
+			 echo"\n";
 			 }
             }
-            add_action('wp_head', 'iPhonefavicon');
+            add_action('wp_head', 'iPhone_originalfavicon');
+            
+            
+            function iPhone_precomposedfavicon() {
+            $options = get_option('fav_url_option');
+			
+			 if(empty($options['iphone_precomposed_url'])){
+			 echo "";
+			 } else {
+			 echo"<link rel=\"apple-touch-icon-precomposed\" href=\"$options[iphone_precomposed_url]\" />\n";
+			 echo"\n";
+			 }
+            }
+            add_action('wp_head', 'iPhone_precomposedfavicon');
 			
 			
 
