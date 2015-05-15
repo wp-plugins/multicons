@@ -3,7 +3,7 @@
 Plugin Name: Multicons
 Plugin URI: http://www.doc4design.com/plugins/multicons
 Description: Auto generates code for both a favicon and an apple favicon into the header of your website
-Version: 2.0
+Version: 2.1
 Author: Doc4
 Author URI: http://www.doc4design.com
 */
@@ -30,7 +30,7 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 *********************************************************************************/
 
 
-$ver= '2.0';
+$ver= '2.1';
 
 $gfile = dirname(__FILE__) . '/multicons.php';
 /* Causing problems with some users
