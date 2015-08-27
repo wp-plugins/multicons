@@ -10,7 +10,7 @@ Author URI: http://www.doc4design.com
 
 /******************************************************************************
 
-Copyright 2010  Doc4 : info@doc4design.com
+Copyright 2015  Doc4 : info@doc4design.com
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -61,6 +61,17 @@ function personal_setup_menu() {
 
 // Install the options page
 add_action('admin_menu', 'personal_setup_menu');
+
+http://www.doc4design.com/wp-admin/options-general.php?page=page=multicons%2Fmulticons.php
+
+function plugin_add_settings_link( $links ) {
+    $settings_link = '<a href="options-general.php?page=multicons%2Fmulticons.php">' . __( 'Settings' ) . '</a>';
+    array_push( $links, $settings_link );
+  	return $links;
+}
+$plugin = plugin_basename( __FILE__ );
+add_filter( "plugin_action_links_$plugin", 'plugin_add_settings_link' );
+
 
 function personal_setup_page(){
 	global $wpdb;
