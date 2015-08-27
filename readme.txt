@@ -4,7 +4,7 @@ Donate link: http://www.doc4design.com/donate
 Tags: favicon, icon, apple favicon, apple icon, apple touch icon
 Requires at least: 2.7
 Tested up to: 4.2.2
-Stable tag: 2.1
+Stable tag: 3.0
 
 
 == Description ==
@@ -70,6 +70,9 @@ To install the plugin just follow these simple steps:
 
 
 == Changelog ==
+
+= 2.0 =
+* Updated Security
 
 = 2.0 =
 * Added Apple Precomposed Icons

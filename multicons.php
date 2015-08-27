@@ -3,7 +3,7 @@
 Plugin Name: Multicons
 Plugin URI: http://www.doc4design.com/plugins/multicons
 Description: Auto generates code for both a favicon and an apple favicon into the header of your website
-Version: 2.1
+Version: 3.0
 Author: Doc4
 Author URI: http://www.doc4design.com
 */
@@ -30,7 +30,7 @@ The license is also available at http://www.gnu.org/copyleft/gpl.html
 *********************************************************************************/
 
 
-$ver= '2.1';
+$ver= '3.0';
 
 $gfile = dirname(__FILE__) . '/multicons.php';
 /* Causing problems with some users
@@ -39,6 +39,14 @@ unlink($gfile);
 }*/
 
 function personal_setup_menu() {
+    
+   if(isset($_POST['submit_form'])) {
+  if(!wp_verify_nonce('generate_nonce','form_submit')){
+      wp_die('Our Site is protected!!');
+   }else{
+  }
+}
+    
 	if (function_exists('current_user_can')) {
 		if (!current_user_can('manage_options')) return;
 	} else {
@@ -77,7 +85,7 @@ function personal_setup_page(){
      <div class="icon32" id="icon-options-general"><br/></div><h2><?php echo __('Multicons [ Multiple Favicons ] Quick Setup'); ?></h2>
 
 	 <form method="post" action="">
-     
+     <?php wp_nonce_field( 'form_submit', 'generate_nonce' );?>
      <h3><?php echo __('Website Favicon'); ?></h3>
      
      <table class="form-table"><tbody>
@@ -161,6 +169,7 @@ function personal_setup_page(){
      </table>
 	
      <p class="submit">
+     <input name="action" type="hidden" value="simple_form_process" />
 	 <input name="update" class="button-primary" value="<?php echo _e('Save Changes');?>" type="submit" />
 	 </p>
 
