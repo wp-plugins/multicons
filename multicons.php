@@ -82,8 +82,7 @@ function mmf_field_callback_iosflat() {
 // display
 function mmf_options_page() {
 ?>
-<div class="wrap"> 
-	<div class="icon32"></div> 
+<div class="wrap">
 	<h1><?php _e( 'Multicons [ Multiple Favicons ]', 'multicons-mulitple-favicons' ); ?></h1> 
 	<hr>
 	<form action="options.php" method="POST">
