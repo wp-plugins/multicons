@@ -3,245 +3,159 @@
 Plugin Name: Multicons
 Plugin URI: http://www.doc4design.com/plugins/multicons
 Description: Auto generates code for both a favicon and an apple favicon into the header of your website
-Version: 3.0
+Version: 4.0
 Author: Doc4
 Author URI: http://www.doc4design.com
 */
 
-/******************************************************************************
 
-Copyright 2015  Doc4 : info@doc4design.com
+add_action('plugins_loaded', 'multicons_init');
+ 
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-The license is also available at http://www.gnu.org/copyleft/gpl.html
-
-*********************************************************************************/
-
-
-$ver= '3.0';
-
-$gfile = dirname(__FILE__) . '/multicons.php';
-/* Causing problems with some users
-if(file_exists($gfile)){
-unlink($gfile);
-}*/
-
-function personal_setup_menu() {
-    
-   if(isset($_POST['submit_form'])) {
-  if(!wp_verify_nonce('generate_nonce','form_submit')){
-      wp_die('Our Site is protected!!');
-   }else{
-  }
+// install the options pages
+function multicons_menu_page() {
+	add_options_page( __( 'Multicons', 'multicons-mulitple-favicons' ), __( 'Multicons', 'multicons-mulitple-favicons' ), 'manage_options', 'mmf', 'mmf_options_page' );
 }
-    
-	if (function_exists('current_user_can')) {
-		if (!current_user_can('manage_options')) return;
-	} else {
-		global $user_level;
-		get_currentuserinfo();
-		if ($user_level < 8) return;
-	}
-	if (function_exists('add_options_page')) {
-		add_options_page(__('Multicons'), __('Multicons'), 1, __FILE__, 'personal_setup_page');
-	}
-} 
+add_action( 'admin_menu', 'multicons_menu_page' );
 
-// Install the options page
-add_action('admin_menu', 'personal_setup_menu');
 
-http://www.doc4design.com/wp-admin/options-general.php?page=page=multicons%2Fmulticons.php
+// admin 
+function mmf_admin_init() {
+	add_settings_section( 'mmf-section', __( 'Website Favicon', 'multicons-mulitple-favicons' ), 'mmf_section_callback', 'mmf' );
+	add_settings_field( 'mmf-field', __( 'Your Website Favicon', 'multicons-mulitple-favicons' ), 'mmf_field_callback', 'mmf', 'mmf-section' );
+	register_setting( 'mmf-options', 'mmf-setting', 'sanitize_text_field' );
+	
+	add_settings_section( 'mmf-section_admin', __( 'Dashboard Favicon', 'multicons-mulitple-favicons' ), 'mmf_section_callback_admin', 'mmf' );
+	add_settings_field( 'mmf-field_admin', __( 'Dashboard Favicon', 'multicons-mulitple-favicons' ), 'mmf_field_callback_admin', 'mmf', 'mmf-section_admin' );
+	register_setting( 'mmf-options', 'mmf-setting-admin', 'sanitize_text_field' );
 
-function plugin_add_settings_link( $links ) {
-    $settings_link = '<a href="options-general.php?page=multicons%2Fmulticons.php">' . __( 'Settings' ) . '</a>';
-    array_push( $links, $settings_link );
-  	return $links;
+	add_settings_section( 'mmf-section-ios', __( 'Apple Touch Original Icon', 'multicons-mulitple-favicons' ), 'mmf_section_callback_ios', 'mmf' );
+	add_settings_field( 'mmf-field-ios', __( 'Apple Touch Favicon', 'multicons-mulitple-favicons' ), 'mmf_field_callback_ios', 'mmf', 'mmf-section-ios' );
+	register_setting( 'mmf-options', 'mmf-setting-ios', 'sanitize_text_field' );
+	
+	add_settings_section( 'mmf-section-iosflat', __( 'Apple Touch Precomposed Icon', 'multicons-mulitple-favicons' ), 'mmf_section_callback_iosflat', 'mmf' );
+	add_settings_field( 'mmf-field-iosflat', __( 'Apple Precomposed Favicon', 'multicons-mulitple-favicons' ), 'mmf_field_callback_iosflat', 'mmf', 'mmf-section-iosflat' );
+	register_setting( 'mmf-options', 'mmf-setting-iosflat', 'sanitize_text_field' );
 }
-$plugin = plugin_basename( __FILE__ );
-add_filter( "plugin_action_links_$plugin", 'plugin_add_settings_link' );
+add_action( 'admin_init', 'mmf_admin_init' );
 
 
-function personal_setup_page(){
-	global $wpdb;
-	if (isset($_POST['update'])) {
-	    $options['global_url'] = trim($_POST['global_url'],'{}');
-		$options['admin_url'] = trim($_POST['admin_url'],'{}');
-	    $options['iphone_original_url'] = trim($_POST['iphone_original_url'],'{}');
-	    $options['iphone_precomposed_url'] = trim($_POST['iphone_precomposed_url'],'{}');
-		
-		update_option('fav_url_option', $options);
-		// Show a message to indicate something has happened
-		echo '<div class="updated"><p>' . __('Options saved') . '</p></div>';
-	} else {
-		
-		$options = get_option('fav_url_option');
+function mmf_section_callback() {
+    echo __( '• Upload your favicon file in .ico format to the media library and paste the link below.<br/>• Dimensions: 16 x 16 pixels or Multi-Size', 'multicons-mulitple-favicons' ); 
+}
+
+function mmf_section_callback_admin() {
+    echo __( '• Upload your favicon file in .ico format to the media library and paste the link below.<br/>• Dimensions: 16 x 16 pixels or Multi-Size', 'multicons-mulitple-favicons' ); 
+}
+
+function mmf_section_callback_ios() {
+    echo __( '• Upload your icon in .png format to the media library and paste the link below.<br/>• <strong>Only use one Apple Touch Icon link (Do not add a url to both Original and Precomposed)</strong><br/>• Name your Apple Touch Original Icon [apple-touch-icon.png]<br/>• Dimensions: 180 x 180 pixels', 'multicons-mulitple-favicons' ); 
+}
+
+function mmf_section_callback_iosflat() {
+    echo __( '• Upload your icon in .png format to the media library and paste the link below.<br/>• <strong>Only use one Apple Touch Icon link (Do not add a url to both Original and Precomposed)</strong><br/>• Name your Apple Touch Precomposed Icon [apple-touch-icon-precomposed.png]<br/>• Dimensions: 180 x 180 pixels', 'multicons-mulitple-favicons' ); 
+}
+
+
+// fields
+function mmf_field_callback() {
+	$mmf_setting = esc_url( get_option( 'mmf-setting' ) );
+	echo "<input type='text' size='60' maxlength='150' name='mmf-setting' value='$mmf_setting' /><br/><br/><br/>";
+}
+
+function mmf_field_callback_admin() {
+	$mmf_setting_admin = esc_url( get_option( 'mmf-setting-admin' ) );
+	echo "<input type='text' size='60' maxlength='150' name='mmf-setting-admin' value='$mmf_setting_admin' /><br/><br/><br/>";
+}
+
+function mmf_field_callback_ios() {
+	$mmf_setting_ios = esc_url( get_option( 'mmf-setting-ios' ) );
+	echo "<input type='text' size='60' maxlength='150' name='mmf-setting-ios' value='$mmf_setting_ios' /><br/><br/><br/>";
+}
+
+function mmf_field_callback_iosflat() {
+	$mmf_setting_iosflat = esc_url( get_option( 'mmf-setting-iosflat' ) );
+	echo "<input type='text' size='60' maxlength='150' name='mmf-setting-iosflat' value='$mmf_setting_iosflat' /><br/><br/><br/>";
+}
+
+
+// display
+function mmf_options_page() {
+?>
+<div class="wrap"> 
+	<div class="icon32"></div> 
+	<h1><?php _e( 'Multicons [ Multiple Favicons ]', 'multicons-mulitple-favicons' ); ?></h1> 
+	<hr>
+	<form action="options.php" method="POST">
+	<?php settings_fields( 'mmf-options' ); ?>
+	<?php do_settings_sections( 'mmf' ); ?>
+	<?php submit_button(__('Save Changes', 'multicons-mulitple-favicons')); ?>
+	</form>
+	<hr>
+	<p><?php _e( 'Note: When no link is provided, a default favicon will be used.', 'multicons-mulitple-favicons' ); ?></p>
+
+</div>
+<?php
+}
+
+
+// add to the website header
+function mmf_display_favicon() {
+	$mmf_custom_favicon = esc_url( get_option( 'mmf-setting' ) );
+	$mmf_default_favicon = plugins_url( 'images/favicon.ico', __FILE__ ); 
+
+	if (empty( $mmf_custom_favicon )) {
+		echo '<link rel="shortcut icon" href="'.$mmf_default_favicon.'" />'."\n";
 	}
-	
-	?>
-		
-     <!-- Favion Settings -->
-     <div class="wrap">
-     <div class="icon32" id="icon-options-general"><br/></div><h2><?php echo __('Multicons [ Multiple Favicons ] Quick Setup'); ?></h2>
+	else {
+		echo '<link rel="shortcut icon" href="'.$mmf_custom_favicon.'" />'."\n";
+	}
+}
+add_action( 'wp_head', 'mmf_display_favicon' );
 
-	 <form method="post" action="">
-     <?php wp_nonce_field( 'form_submit', 'generate_nonce' );?>
-     <h3><?php echo __('Website Favicon'); ?></h3>
-     
-     <table class="form-table"><tbody>
-     
-     <tr><th scope="row"><?php _e('Favicon URL') ?></th>
-	 <td><label><input name="global_url" type="text" id="global_url" value="<?php echo $options['global_url']; ?>" size="60" /></label><br/>
-	 <?php printf(__('Indicate the absolute path to the Favicon image.<br />
-					   Example: <em>http://www.yoursite.com/favicon.ico</em>')); ?>
-	 </td></tr>
-     
-     <tr><th scope="row"><?php _e('Instructions') ?></th>
-	 <td>
-	 <?php printf(__('1. Name your Favicon [favicon.ico]<br />
-	                   2. Place the Favicon image file in the root dirctory of your website. [same location as wp-content]')); ?>
-     
-     </tbody>
-     </table>
-     
-     
-     <h3><?php echo __('Dashboard Favicon'); ?></h3>
-     
-     <table class="form-table"><tbody>
-     
-     <tr><th scope="row"><?php _e('Dashboard Favicon URL') ?></th>
-	 <td><label><input name="admin_url" type="text" id="admin_url" value="<?php echo $options['admin_url']; ?>" size="60" /></label><br/>
-	 <?php printf(__('Indicate the absolute path to the Admin Favicon image.<br />
-	                   Example: <em>http://www.yoursite.com/wp-content/favicon.ico</em>')); ?>
-	 </td></tr>
-     
-     <tr><th scope="row"><?php _e('Instructions') ?></th>
-	 <td>
-	 <?php printf(__('1. Leave field blank to use the Website Favicon from above.<br/>
-	 				   2. Name your Dashboard Favicon [favicon.ico]<br />
-					   3. Place the Dashboard Favicon image file in the wp-content folder of your website. [same location as themes]')); ?>
-     
-     </tbody>
-     </table>
-     
-     
-     <h3><?php echo __('Apple Touch Original Icon'); ?></h3>
-     
-     <table class="form-table"><tbody>
-     
-     <tr><th scope="row"><?php _e('Apple Touch Original Icon URL') ?></th>
-	 <td><label><input name="iphone_original_url" type="text" id="iphone_original_url" value="<?php echo $options['iphone_original_url']; ?>" size="60" /></label><br/>
-	 <?php printf(__('Indicate the absolute path to the Apple Touch Original Icon image.<br />
-	                   Example: <em>http://www.yoursite.com/apple-touch-icon.png</em>')); ?>
-	 </td></tr>
-     
-     <tr><th scope="row"><?php _e('Instructions') ?></th>
-	 <td>
-	 <?php printf(__('1. Only use one Apple Touch Icon link (Do not add a url to both Original and Precomposed)<br />
-	  				   2. Name your Apple Touch Original Icon [apple-touch-icon.png]<br />
-	                   3. Place the Apple Touch Original Icon image file in the root dirctory of your website. [same location as wp-content]<br />
-					   4. Rounded corners and Gloss effects are automatically applied by Apple devices searching for this icon.')); ?>
-	 </td></tr>
-     
-     </tbody>
-     </table>
-     
-     
-     <h3><?php echo __('Apple Touch Precomposed Icon'); ?></h3>
-     
-     <table class="form-table"><tbody>
-     
-     <tr><th scope="row"><?php _e('Apple Touch Precomposed Icon URL') ?></th>
-	 <td><label><input name="iphone_precomposed_url" type="text" id="iphone_precomposed_url" value="<?php echo $options['iphone_precomposed_url']; ?>" size="60" /></label><br/>
-	 <?php printf(__('Indicate the absolute path to the Apple Touch Precomposed Icon image.<br />
-	                   Example: <em>http://www.yoursite.com/apple-touch-icon-precomposed.png</em>')); ?>
-	 </td></tr>
-     
-     <tr><th scope="row"><?php _e('Instructions') ?></th>
-	 <td>
-	 <?php printf(__('1. Only use one Apple Touch Icon link (Do not add a url to both Original and Precomposed)<br />
-	 				   2. Name your Apple Touch Precomposed Icon [apple-touch-icon-precomposed.png]<br />
-	                   3. Place the Apple Touch Precomposed Icon image file in the root dirctory of your website. [same location as wp-content]<br />
-					   4. No effects are applied by Apple devices searching for this icon.')); ?>
-	 </td></tr>
-     
-     </tbody>
-     </table>
-	
-     <p class="submit">
-     <input name="action" type="hidden" value="simple_form_process" />
-	 <input name="update" class="button-primary" value="<?php echo _e('Save Changes');?>" type="submit" />
-	 </p>
 
-     </form> 
-		       		
-	 </div>
+// add to the website admin header
+function mmf_display_favicon_admin() {
+	$mmf_custom_favicon_admin = esc_url( get_option( 'mmf-setting-admin' ) );
+	$mmf_default_favicon_admin = plugins_url( 'images/favicon.ico', __FILE__ ); 
 
-	       
-	 <?php }
-			   
-            function GlobalFavicon() {
-			$options = get_option('fav_url_option');
-            
-			 if(empty($options['global_url'])){
-			 echo "";
-			 } else {
-			 echo"<link rel=\"shortcut icon\" href=\"$options[global_url]\" />\n<link rel=\"icon\" type=\"image/png\" href=\"$options[global_url]\" />\n";
-			 }
-            } 
-			add_action('wp_head', 'GlobalFavicon');
-			
+	if (empty( $mmf_custom_favicon_admin )) {
+		echo '<link rel="shortcut icon" href="'.$mmf_default_favicon_admin.'" />'."\n";
+	}
+	else {
+		echo '<link rel="shortcut icon" href="'.$mmf_custom_favicon_admin.'" />'."\n";
+	}
+}
+add_action( 'admin_head', 'mmf_display_favicon_admin' );
 
-            function Dashboardfavicon() {
-            $options = get_option('fav_url_option');
-			 // Decide what to do if the dashboard option is empty
-			 if(empty($options['admin_url'])){
-			   $options = get_option('fav_url_option');
-			   echo"<link rel=\"shortcut icon\" href=\"$options[global_url]\" />";
-			 } else {
-			 echo"<link rel=\"shortcut icon\" href=\"$options[admin_url]\" />";
-			 }
-            }
-            add_action('admin_head', 'Dashboardfavicon');
-			
-			
-			function iPhone_originalfavicon() {
-            $options = get_option('fav_url_option');
-			
-			 if(empty($options['iphone_original_url'])){
-			 echo "";
-			 } else {
-			 echo"<link rel=\"apple-touch-icon\" href=\"$options[iphone_original_url]\" />\n";
-			 echo"\n";
-			 }
-            }
-            add_action('wp_head', 'iPhone_originalfavicon');
-            
-            
-            function iPhone_precomposedfavicon() {
-            $options = get_option('fav_url_option');
-			
-			 if(empty($options['iphone_precomposed_url'])){
-			 echo "";
-			 } else {
-			 echo"<link rel=\"apple-touch-icon-precomposed\" href=\"$options[iphone_precomposed_url]\" />\n";
-			 echo"\n";
-			 }
-            }
-            add_action('wp_head', 'iPhone_precomposedfavicon');
-			
-			
 
-		   
-		   ?>
+// add apple original icon to website header
+function mmf_display_icon_ios() {
+	$mmf_custom_icon_ios = esc_url( get_option( 'mmf-setting-ios' ) );
+	$mmf_default_icon_ios = plugins_url( 'images/apple-touch-icon.png', __FILE__ ); 
+
+	if (empty( $mmf_custom_icon_ios )) {
+		echo '';
+	}
+	else {
+		echo '<link rel="apple-touch-icon" href="'.$mmf_custom_icon_ios.'" />'."\n";
+	}
+}
+add_action( 'wp_head', 'mmf_display_icon_ios' );
+
+
+// add apple precomposed icon to website header
+function mmf_display_icon_iosflat() {
+	$mmf_custom_icon_iosflat = esc_url( get_option( 'mmf-setting-iosflat' ) );
+	$mmf_default_icon_iosflat = plugins_url( 'images/apple-touch-icon.png', __FILE__ ); 
+
+	if (empty( $mmf_custom_icon_iosflat )) {
+		echo '<link rel="apple-touch-icon" href="'.$mmf_default_icon_iosflat.'" />'."\n";
+	}
+	else {
+		echo '<link rel="apple-touch-icon" href="'.$mmf_custom_icon_iosflat.'" />'."\n";
+	}
+}
+add_action( 'wp_head', 'mmf_display_icon_iosflat' );
+
+?>
