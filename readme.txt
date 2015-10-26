@@ -1,4 +1,4 @@
-=== Multicons [ Mulitple Favicons ] ===
+=== Multicons [ Multiple Favicons ] ===
 Contributors: Doc4
 Donate link: http://www.doc4design.com/donate
 Tags: favicon, icon, apple favicon, apple icon, apple touch icon
@@ -48,9 +48,9 @@ link rel="apple-touch-icon" href="http://www.yoursite.com/apple-touch-icon.png"
 link rel="apple-touch-icon" href="http://www.yoursite.com/apple-touch-icon.png"
 
 
-If no image links are provided then no code is output thus, leaving a settings field blank will not bloat the site down with empty meta tags. If an is Admin image is not provided this option will default to the Site-Wide Favicon.
+If no image links are provided then no code is output thus, leaving a settings field blank will not bloat the site down with empty meta tags. If an Admin image is not provided this option will default to the Site-Wide Favicon.
 
-This plugin includes two sample files to assist in building the required images. We have included both a favicon.tiff and an apple-touch-icon.tiff file. These sample images are pre-sized and ready for a creative mind. Open these files in a graphics editor of your choice, make the necessary changes, save them in their appropriate file format and upload them. Typically favicons are stored in the 'root' of a website or in the case of WordPress, the same location as the 'wp-content' folder.
+This plugin includes two sample files to assist in building the required images. We have included both a favicon.tif and an apple-touch-icon.tif file. These sample images are pre-sized and ready for a creative mind. Open these files in a graphics editor of your choice, make the necessary changes, save them in their appropriate file format and upload them.
 
 == Screenshots ==
 
