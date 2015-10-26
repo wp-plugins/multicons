@@ -3,7 +3,7 @@
 Plugin Name: Multicons
 Plugin URI: http://www.doc4design.com/plugins/multicons
 Description: Auto generates code for both a favicon and an apple favicon into the header of your website
-Version: 4.1
+Version: 4.2
 Author: Doc4
 Author URI: http://www.doc4design.com
 */
@@ -12,7 +12,7 @@ Author URI: http://www.doc4design.com
 
 // install the options pages
 function multicons_menu_page() {
-	add_menu_page( __( 'Multicons', 'multicons-mulitple-favicons' ), __( 'Multicons', 'multicons-mulitple-favicons' ), 'manage_options', 'mmf', 'mmf_options_page', plugins_url( 'multicons/images/icon.png' ));
+	add_options_page( __( 'Multicons', 'multicons-mulitple-favicons' ), __( 'Multicons', 'multicons-mulitple-favicons' ), 'manage_options', 'mmf', 'mmf_options_page' );
 }
 add_action( 'admin_menu', 'multicons_menu_page' );
 
