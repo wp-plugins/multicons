@@ -4,7 +4,7 @@ Donate link: http://www.doc4design.com/donate
 Tags: favicon, icon, apple favicon, apple icon, apple touch icon
 Requires at least: 2.7
 Tested up to: 4.3.1
-Stable tag: 4
+Stable tag: 4.1
 
 
 == Description ==
@@ -71,23 +71,26 @@ To install the plugin just follow these simple steps:
 
 == Changelog ==
 
+= 4.1 = 
+* Removed an improper function call causing some users to see “Warning: call_user_func_array()”
+
 = 4.0 = 
-* We've Completely Re-Written the Plugin Code for Security Reasons
-* Requested WordPress Reinstatement of Plugin
+* Rewrote the plugin code for security reasons and for WordPress approval
 
 = 3.0 =
-* Updated for Security Reasons
+* Updated for security reasons
+* Failed Testing
 
 = 2.0 =
 * Added Apple Precomposed Icons
-* Make a Distinction Between Original and Precomposed Apple Icons
+* Make a distinction between Original and Precomposed Apple Icons
 
 = 1.2 =
 * Updated instructions for clarity
-* Fixed File Naming Error. [favicon.icon] is Incorrect
+* Fixed file naming error. [favicon.icon] is incorrect
 
 = 1.1 =
-* Removed Unlink Function - Causing Problems
+* Removed unlink function - causing problems
 
 = 1.0 =
-* Release cCndidate 1: Code Name 'Fapple'
+* Release candidate 1: code name 'Fapple'
